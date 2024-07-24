@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>../mango_common</module>
-        <module>../mango_core</module>
+<!--        <module>../mango_common</module>-->
+<!--        <module>../mango_core</module>-->
         <module>../mango_admin</module>
     </modules>
 
