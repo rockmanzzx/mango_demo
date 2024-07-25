@@ -43,4 +43,6 @@ public interface DictMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Dict row);
+
+
 }

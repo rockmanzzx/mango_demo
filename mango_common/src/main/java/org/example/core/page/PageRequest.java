@@ -4,6 +4,11 @@ public class PageRequest {
     private int pageNum;
     private int pageSize;
 
+    public PageRequest() {
+        this.pageNum = 1;
+        this.pageSize = 10;
+    }
+
     public PageRequest(int pageNum, int pageSize) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
