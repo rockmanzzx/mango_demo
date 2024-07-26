@@ -26,9 +26,4 @@ public class UserServiceImpl implements UserService {
     public PageResult findPage(PageRequest pageRequest) {
         return MyBatisPageHelper.findPage(pageRequest, userMapper);
     }
-
-    @Override
-    public PageResult<User> findPageByName(PageRequest pageRequest) {
-        return MyBatisPageHelper.findPage(pageRequest, userMapper, "selectByName");
-    }
 }

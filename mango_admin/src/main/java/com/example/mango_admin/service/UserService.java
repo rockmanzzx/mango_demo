@@ -9,8 +9,5 @@ import java.util.List;
 public interface UserService {
     public List<User> findAll();
 
-    PageResult<User> findPage(PageRequest pageRequest);
-
-    PageResult<User> findPageByName(PageRequest pageRequest);
-
+    PageResult findPage(PageRequest pageRequest);
 }

@@ -44,5 +44,4 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User row);
 
-    List<User> selectByName(String name);
 }

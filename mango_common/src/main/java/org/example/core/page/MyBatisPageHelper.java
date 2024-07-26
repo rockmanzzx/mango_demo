@@ -58,13 +58,13 @@ public class MyBatisPageHelper {
      * @param pageInfo
      * @return
      */
-    private static PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
+    private static <T> PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
         PageResult pageResult = new PageResult();
         pageResult.setPageNum(pageInfo.getPageNum());
         pageResult.setPageSize(pageInfo.getPageSize());
         pageResult.setTotalPages((int) pageInfo.getTotal());
         pageResult.setTotalSize(pageInfo.getPages());
-        pageResult.setContent(pageInfo.getList());
+        pageResult.setContent((List<T>) pageInfo.getList());
         return pageResult;
     }
 
