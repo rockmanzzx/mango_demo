@@ -43,4 +43,6 @@ public interface UserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(User row);
+
+    List<User> selectByName(String name);
 }

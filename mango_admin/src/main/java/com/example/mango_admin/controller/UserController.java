@@ -28,4 +28,8 @@ public class UserController {
 //        return userService.findPage(pageRequest);
     }
 
+    @PostMapping("/findPageByName")
+    public HttpResult listUsersByName(@RequestBody PageRequest pageRequest, @RequestParam String name) {
+        return null;
+    }
 }

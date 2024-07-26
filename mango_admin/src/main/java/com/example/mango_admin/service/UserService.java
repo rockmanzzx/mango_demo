@@ -11,4 +11,6 @@ public interface UserService {
 
     PageResult<User> findPage(PageRequest pageRequest);
 
+    PageResult<User> findPageByName(PageRequest pageRequest);
+
 }

@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.Dict;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface DictMapper {
@@ -43,6 +45,4 @@ public interface DictMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Dict row);
-
-
 }

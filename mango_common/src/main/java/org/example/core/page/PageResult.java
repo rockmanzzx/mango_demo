@@ -9,14 +9,6 @@ public class PageResult<T> {
     private int totalPages;
     private List<T> content;
 
-    public PageResult(int pageNum, int pageSize, long totalSize, int totalPages, List<T> content) {
-        this.pageNum = pageNum;
-        this.pageSize = pageSize;
-        this.totalSize = totalSize;
-        this.totalPages = totalPages;
-        this.content = content;
-    }
-
     public int getPageNum() {
         return pageNum;
     }
