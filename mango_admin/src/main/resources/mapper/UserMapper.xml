@@ -90,5 +90,11 @@
     create_by, create_time, last_update_by, last_update_time, del_flag
     from sys_user
   </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from sys_user
+    where name like concat ('%', #{name}, '%')
+  </select>
   
 </mapper>

@@ -10,4 +10,6 @@ public interface UserService {
     public List<User> findAll();
 
     PageResult findPage(PageRequest pageRequest);
+
+    PageResult findPageByName(PageRequest pageRequest);
 }

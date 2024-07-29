@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -43,5 +45,7 @@ public interface UserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(User row);
+
+    List<User> selectByName(@Param("name") String name);
 
 }

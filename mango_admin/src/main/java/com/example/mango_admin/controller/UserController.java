@@ -25,7 +25,10 @@ public class UserController {
     @PostMapping("/findPage")
     public HttpResult listUsers(@RequestBody PageRequest pageRequest) {
         return HttpResult.success(userService.findPage(pageRequest));
-//        return userService.findPage(pageRequest);
     }
 
+    @PostMapping("/findPageByName")
+    public HttpResult findPageByName(@RequestBody PageRequest pageRequest) {
+        return HttpResult.success(userService.findPageByName(pageRequest));
+    }
 }
