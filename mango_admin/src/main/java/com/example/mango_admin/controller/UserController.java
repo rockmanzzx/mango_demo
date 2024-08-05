@@ -5,9 +5,12 @@ import com.example.mango_admin.service.UserService;
 import org.example.core.http.HttpResult;
 import org.example.core.page.PageRequest;
 import org.example.core.page.PageResult;
+import org.example.core.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -17,9 +20,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/findAll")
-    public List<User> findAll() {
-        return userService.findAll();
+    @PostMapping("/save")
+    public HttpResult save(@RequestBody User user) {
+        return HttpResult.success(userService.save(user));
+    }
+
+    @PostMapping("/delete")
+    public HttpResult delete(@RequestBody User user) {
+        return HttpResult.success(userService.delete(user));
     }
 
     @PostMapping("/findPage")
@@ -30,5 +38,11 @@ public class UserController {
     @PostMapping("/findPageByName")
     public HttpResult findPageByName(@RequestBody PageRequest pageRequest) {
         return HttpResult.success(userService.findPageByName(pageRequest));
+    }
+
+    @PostMapping("/exportExcelUser")
+    public void exportExcelUser(@RequestBody PageRequest pageRequest, HttpServletResponse response) {
+        File file = userService.createUserExcleFile(pageRequest);
+        FileUtils.downloadFile(response, file, file.getName());
     }
 }
