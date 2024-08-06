@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == null || user.getId() == 0) {
             return userMapper.insert(user);
         }
-        return userMapper.updateByPrimaryKey(user);
+        return update(user);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
         for (User user : list) {
             delete(user);
         }
-        return 1;
+        return list.size();
     }
 
     @Override
@@ -63,6 +65,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userMapper.selectAll();
+    }
+
+    @Override
+    public User findByName(String name) {
+        // TODO: findByName
+        return null;
+    }
+
+    @Override
+    public Set<String> findPermissionsByName(String name) {
+        // TODO: findPermissionsByName
+        return Collections.emptySet();
     }
 
     @Override

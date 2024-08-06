@@ -1,5 +1,7 @@
 package com.example.mango_admin.util;
 
+import com.example.mango_admin.security.GrantedAuthorityImpl;
+import com.example.mango_admin.security.JwtAuthenticationToken;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,12 +43,28 @@ public class JwtTokenUtils {
                 }
                 authentication = new JwtAuthenticationToken(username, null, authorities, token);
             } else {
-                if (validateToken(token, SecurityUtils.getUsername)) {
+                if (validateToken(token, SecurityUtils.getUsername())) {
                     authentication = SecurityUtils.getAuthentication();
                 }
             }
         }
         return authentication;
+    }
+
+    private static boolean validateToken(String token, String username) {
+        String name = getUsernameFromToken(token);
+        return username.equals(name) && !isTokenExpired(token);
+    }
+
+    public static String getUsernameFromToken(String token) {
+        String username;
+        try {
+            Claims claims = getClaimsFromToken(token);
+            username = claims.getSubject();
+        } catch (Exception e) {
+            username = null;
+        }
+        return username;
     }
 
     private static boolean isTokenExpired(String token) {

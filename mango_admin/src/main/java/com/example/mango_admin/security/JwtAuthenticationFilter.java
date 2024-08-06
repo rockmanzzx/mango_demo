@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAnthenticationFilter extends BasicAuthenticationFilter {
-    public JwtAnthenticationFilter(AuthenticationManager authenticationManager) {
+public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 

@@ -7,6 +7,7 @@ import org.example.core.page.PageRequest;
 import org.example.core.page.PageResult;
 import org.example.core.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody User user) {
         return HttpResult.success(userService.save(user));
