@@ -19,6 +19,10 @@ public class HttpResult {
         return new HttpResult(HttpStatus.SUCCESS.getCode(), msg, data);
     }
 
+    public static HttpResult error(String message) {
+        return new HttpResult(HttpStatus.INTERNAL_SERVER_ERROR.getCode(), message, null);
+    }
+
     public static HttpResult error(HttpStatus status) {
         return new HttpResult(status.getCode(), status.getMessage(), null);
     }

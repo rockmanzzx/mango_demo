@@ -1,10 +1,17 @@
 package com.example.mango_admin.controller;
 
+import com.example.mango_admin.model.User;
+import com.example.mango_admin.service.UserService;
+import com.example.mango_admin.vo.LoginBean;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.apache.poi.util.IOUtils;
+import org.example.core.http.HttpResult;
+import org.example.core.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
@@ -21,7 +28,10 @@ public class LoginController {
     @Autowired
     private Producer producer;
 
-    @GetMapping("captcha")
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/captcha")
     public void captcha(HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
@@ -31,6 +41,26 @@ public class LoginController {
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
         IOUtils.closeQuietly(out);
+    }
+
+    @PostMapping("/login")
+    public HttpResult login(@RequestBody LoginBean loginBean, @RequestBody HttpServletRequest request) throws IOException {
+        String username = loginBean.getAccount();
+        String password = loginBean.getPassword();
+        String captcha = loginBean.getCaptcha();
+
+        Object kaptcha = request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (kaptcha == null) {
+            return HttpResult.error("验证码已失效");
+        }
+        if (!captcha.equalsIgnoreCase(captcha)) {
+            return HttpResult.error("验证码错误");
+        }
+
+        User user = userService.findByName(username);
+        if (user == null) {
+            return HttpResult.error("账号不存在");
+        }
     }
 
 }

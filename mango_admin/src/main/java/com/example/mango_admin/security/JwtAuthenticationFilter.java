@@ -1,5 +1,6 @@
 package com.example.mango_admin.security;
 
+import com.example.mango_admin.util.SecurityUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -16,6 +17,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // TODO: security utils
+        SecurityUtils.checkAuthentication(request);
+        chain.doFilter(request, response);
     }
 }

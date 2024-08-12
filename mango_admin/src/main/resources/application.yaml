@@ -58,3 +58,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.mango_admin.model
+
+#logging:
+#  level:
+#    org.springframework.security: DEBUG
