@@ -69,8 +69,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByName(String name) {
-        // TODO: findByName
-        return null;
+        List<User> userList = userMapper.selectByName(name);
+        if (!userList.isEmpty()) {
+            return userMapper.selectByName(name).get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override

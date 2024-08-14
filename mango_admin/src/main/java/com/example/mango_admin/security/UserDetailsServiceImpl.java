@@ -3,10 +3,12 @@ package com.example.mango_admin.security;
 import com.example.mango_admin.model.User;
 import com.example.mango_admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -31,4 +33,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .map(GrantedAuthorityImpl::new).collect(Collectors.toList());
         return new JwtUserDetails(user.getName(), user.getPassword(), user.getSalt(), grantedAuthorities);
     }
+
 }

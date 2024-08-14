@@ -7,14 +7,26 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JwtTokenUtils {
 
-    private static final String SECRET_KEY = "key";
+    private static final String SECRET_KEY = "abcdefgh";
+
+    /**
+     * 用户名称
+     */
+    private static final String USERNAME = Claims.SUBJECT;
+    /**
+     * 创建时间
+     */
+    private static final String CREATED = "created";
+    /**
+     * 权限列表
+     */
+    private static final String AUTHORITIES = "authorities";
+
+    private static final long EXPIRE_TIME = 12 * 60 * 60 * 1000;
 
     public static Authentication getAuthenticationFromToken(HttpServletRequest request) {
         Authentication authentication = null;
@@ -100,6 +112,19 @@ public class JwtTokenUtils {
             token = null;
         }
         return token;
+    }
+
+    public static String generateToken(Authentication authentication) {
+        Map<String, Object> claims = new HashMap<>(3);
+        claims.put(USERNAME, SecurityUtils.getUsername(authentication));
+        claims.put(CREATED, new Date());
+        claims.put(AUTHORITIES, authentication.getAuthorities());
+        return generateToken(claims);
+    }
+
+    private static String generateToken(Map<String, Object> claims) {
+        Date expirationDate = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+        return Jwts.builder().setClaims(claims).setExpiration(expirationDate).signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
     }
 
 }
