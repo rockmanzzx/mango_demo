@@ -12,6 +12,7 @@
         <module>mango_core</module>
         <module>mango_common</module>
         <module>mango_backup</module>
+        <module>mango_monitor</module>
     </modules>
 
     <properties>
