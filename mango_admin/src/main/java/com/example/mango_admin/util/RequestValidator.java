@@ -1,6 +1,6 @@
 package com.example.mango_admin.util;
 
-import org.example.core.page.PageRequest;
+import org.example.common.page.PageRequest;
 
 public class RequestValidator {
     public static void validatePageRequest(PageRequest pageRequest, String... requiredParams) {

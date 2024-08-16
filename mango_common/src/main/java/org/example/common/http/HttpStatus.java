@@ -1,4 +1,4 @@
-package org.example.core.http;
+package org.example.common.http;
 
 public enum HttpStatus {
     SUCCESS(200, "操作成功"),

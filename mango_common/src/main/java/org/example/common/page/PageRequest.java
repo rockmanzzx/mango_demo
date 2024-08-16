@@ -1,4 +1,4 @@
-package org.example.core.page;
+package org.example.common.page;
 
 import java.util.HashMap;
 import java.util.Map;

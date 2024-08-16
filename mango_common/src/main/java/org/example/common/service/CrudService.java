@@ -1,4 +1,4 @@
-package org.example.core.service;
+package org.example.common.service;
 
 
 import java.util.List;

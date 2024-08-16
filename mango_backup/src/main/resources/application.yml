@@ -1,0 +1,21 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: mango_backup
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mango_db?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+    username: root
+    password:
+
+mango:
+  backup:
+    datasource:
+      host: localhost
+      username: root
+      password:
+      database: mango_db
+
+#debug: true

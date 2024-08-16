@@ -2,17 +2,15 @@ package com.example.mango_admin.controller;
 
 import com.example.mango_admin.model.User;
 import com.example.mango_admin.service.UserService;
-import org.example.core.http.HttpResult;
-import org.example.core.page.PageRequest;
-import org.example.core.page.PageResult;
-import org.example.core.util.FileUtils;
+import org.example.common.http.HttpResult;
+import org.example.common.page.PageRequest;
+import org.example.common.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.util.List;
 
 @RestController
 @RequestMapping("user")

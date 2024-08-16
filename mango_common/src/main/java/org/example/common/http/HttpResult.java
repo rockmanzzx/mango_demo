@@ -1,4 +1,4 @@
-package org.example.core.http;
+package org.example.common.http;
 
 public class HttpResult {
     private int code;
@@ -11,12 +11,24 @@ public class HttpResult {
         this.data = data;
     }
 
+    public static HttpResult success() {
+        return new HttpResult(200, "success", null);
+    }
+
+    public static HttpResult success(String msg) {
+        return new HttpResult(200, msg, null);
+    }
+
     public static HttpResult success(Object data) {
         return new HttpResult(HttpStatus.SUCCESS.getCode(), HttpStatus.SUCCESS.getMessage(), data);
     }
 
     public static HttpResult success(Object data, String msg) {
         return new HttpResult(HttpStatus.SUCCESS.getCode(), msg, data);
+    }
+
+    public static HttpResult error() {
+        return new HttpResult(HttpStatus.INTERNAL_SERVER_ERROR.getCode(), "error", null);
     }
 
     public static HttpResult error(String message) {

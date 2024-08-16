@@ -1,4 +1,4 @@
-package org.example.core.util;
+package org.example.common.util;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.IOUtils;

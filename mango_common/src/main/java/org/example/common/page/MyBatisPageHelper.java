@@ -1,4 +1,4 @@
-package org.example.core.page;
+package org.example.common.page;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

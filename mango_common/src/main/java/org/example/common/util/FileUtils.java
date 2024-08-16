@@ -1,4 +1,4 @@
-package org.example.core.util;
+package org.example.common.util;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -22,5 +22,15 @@ public class FileUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteFile(File file) {
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                deleteFile(f);
+            }
+        }
+        file.delete();
     }
 }

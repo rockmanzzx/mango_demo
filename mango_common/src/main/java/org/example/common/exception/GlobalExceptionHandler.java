@@ -1,7 +1,7 @@
-package org.example.core.exception;
+package org.example.common.exception;
 
-import org.example.core.http.HttpResult;
-import org.example.core.http.HttpStatus;
+import org.example.common.http.HttpResult;
+import org.example.common.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
