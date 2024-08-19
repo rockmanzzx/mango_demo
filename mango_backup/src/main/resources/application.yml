@@ -2,12 +2,18 @@ server:
   port: 8002
 
 spring:
+  application:
+    name: mango_backup
   boot:
     admin:
       client:
         url: "http://localhost:8000"
-  application:
-    name: mango_backup
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+            service-name: ${spring.application.name}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mango_db?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
@@ -19,6 +25,9 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 mango:
   backup:
