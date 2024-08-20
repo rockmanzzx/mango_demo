@@ -11,7 +11,16 @@
         <option value="$PROJECT_DIR$/mango_common/pom.xml" />
         <option value="$PROJECT_DIR$/mango_backup/pom.xml" />
         <option value="$PROJECT_DIR$/mango_monitor/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_producer/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_producer1/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_producer2/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_consumer/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/mango_producer1/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
