@@ -19,6 +19,10 @@ mango-producer:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
+feign:
+  hystrix:
+    enabled: true
+
 management:
   endpoints:
     web:

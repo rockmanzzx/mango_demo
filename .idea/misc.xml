@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/mango_producer1/pom.xml" />
         <option value="$PROJECT_DIR$/mango_producer2/pom.xml" />
         <option value="$PROJECT_DIR$/mango_consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_hystrix/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

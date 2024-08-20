@@ -1,9 +1,9 @@
-package org.example.mango_consumer.service;
+package org.example.mango_consumer.controller;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(name = "mango-producer")
+@FeignClient(name = "mango-producer", fallback = MangoProducerHystrix.class)
 public interface MangoProducerService {
 
     @RequestMapping("/hello")
