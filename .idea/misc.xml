@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/mango_consumer/pom.xml" />
         <option value="$PROJECT_DIR$/mango_hystrix/pom.xml" />
         <option value="$PROJECT_DIR$/mango-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/mango_config/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

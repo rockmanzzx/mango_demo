@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: mango-consumer
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    config:
+      discovery:
+        enabled: true
+        service-id: mango-config
+      name: consumer
+      profile: dev
+      label: main
