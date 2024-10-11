@@ -19,7 +19,8 @@ spring:
         git:
           uri: https://github.com/rockmanzzx/mango_demo_config_repo.git
           clone-on-start: true
-        default-label: main # ??????master?????
+        default-label: main
+
       label: main
   rabbitmq:
     host: localhost

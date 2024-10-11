@@ -14,8 +14,8 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-//                        .allowCredentials(true)
+                        .allowedOrigins("http://localhost:5173")
+                        .allowCredentials(true)
                         .maxAge(3600)
                         .allowedHeaders("*")
                         .allowedMethods("*");
