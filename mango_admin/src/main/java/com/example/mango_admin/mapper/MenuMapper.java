@@ -43,4 +43,9 @@ public interface MenuMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Menu row);
+
+    int updateByPrimaryKeySelective(Menu row);
+
+    int insertSelective(Menu record);
+
 }

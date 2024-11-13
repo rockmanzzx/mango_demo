@@ -19,6 +19,10 @@
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, value, label, type, description, sort, create_by, create_time, last_update_by,
+    last_update_time, remarks, del_flag
+  </sql>
   <insert id="insert" parameterType="com.example.mango_admin.model.Config">
     <!--
       WARNING - @mbg.generated
@@ -44,5 +48,11 @@
     select id, value, label, type, description, sort, dept_id, create_by, create_time, 
     last_update_by, last_update_time, del_flag
     from sys_config
+  </select>
+  <select id="findByLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from sys_config
+    where label = #{label, jdbcType=VARCHAR}
   </select>
 </mapper>

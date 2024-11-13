@@ -1,6 +1,7 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.Config;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -44,4 +45,6 @@ public interface ConfigMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Config row);
+
+    List<Config> findByLabel(@Param(value = "label") String label);
 }

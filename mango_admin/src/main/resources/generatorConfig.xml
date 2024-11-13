@@ -66,7 +66,7 @@
             <columnOverride column="del_flag" javaType="java.lang.Integer"/>
         </table>
 
-        <table tableName="sys_user_role" domainObjectName="UserRole">
+        <table tableName="sys_user_role" domainObjectName="UserRole" enableUpdateByPrimaryKey="true">
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="id" sqlStatement="MySQL" identity="true"/>
             <columnOverride column="del_flag" javaType="java.lang.Integer"/>

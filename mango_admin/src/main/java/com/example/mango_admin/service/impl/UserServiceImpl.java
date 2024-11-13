@@ -32,11 +32,6 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == null || user.getId() == 0) {
             return userMapper.insert(user);
         }
-        return update(user);
-    }
-
-    @Override
-    public int update(User user) {
         return userMapper.updateByPrimaryKey(user);
     }
 
@@ -74,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<String> findPermissionsByName(String name) {
+    public Set<String> findPermissions(String name) {
         // TODO: findPermissionsByName
         return Collections.emptySet();
     }

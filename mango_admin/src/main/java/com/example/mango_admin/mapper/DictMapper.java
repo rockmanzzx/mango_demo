@@ -45,4 +45,8 @@ public interface DictMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Dict row);
+
+    List<Dict> findPage();
+    List<Dict> findPageByLabel(@Param(value = "label") String label);
+    List<Dict> findByLabel(@Param(value = "label") String label);
 }

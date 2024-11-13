@@ -43,4 +43,6 @@ public interface DeptMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Dept row);
+
+    List<Dept> findPage();
 }

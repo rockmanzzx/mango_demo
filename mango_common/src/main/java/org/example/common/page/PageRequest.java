@@ -43,4 +43,11 @@ public class PageRequest {
     public void setParams(Map<String, Object> params) {
         this.params = params;
     }
+
+    /**
+     * 获取参数值
+     */
+    public String getParamValue(String name) {
+        return (String) params.get(name);
+    }
 }
