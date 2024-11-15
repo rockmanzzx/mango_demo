@@ -88,4 +88,13 @@
     create_time, last_update_by, last_update_time, del_flag
     from sys_log
   </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select *
+    from sys_log;
+  </select>
+  <select id="findPageByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from sys_log
+    where user_name like concat('%',#{userName},'%')
+  </select>
 </mapper>

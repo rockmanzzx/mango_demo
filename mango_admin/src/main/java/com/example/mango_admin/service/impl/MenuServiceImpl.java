@@ -1,8 +1,12 @@
 package com.example.mango_admin.service.impl;
 
+import com.example.mango_admin.constant.SysConstants;
 import com.example.mango_admin.mapper.MenuMapper;
 import com.example.mango_admin.model.Menu;
 import com.example.mango_admin.service.MenuService;
+import org.example.common.page.MyBatisPageHelper;
+import org.example.common.page.PageRequest;
+import org.example.common.page.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +22,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public int save(Menu menu) {
-        if(menu.getId() == null || menu.getId() == 0) {
-            return menuMapper.insertSelective(menu);
+        if (menu.getId() == null || menu.getId() == 0) {
+            return menuMapper.insert(menu);
         }
-        if(menu.getParentId() == null) {
-            menu.setParentId(0L);
-        }
-        return menuMapper.updateByPrimaryKeySelective(menu);
+        return menuMapper.updateByPrimaryKey(menu);
     }
 
     @Override
@@ -46,8 +47,16 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> findAll() {
-        return menuMapper.selectAll();
+    public PageResult findPage(PageRequest pageRequest) {
+        return MyBatisPageHelper.findPage(pageRequest, menuMapper);
+    }
+
+    @Override
+    public List<Menu> findByUser(String userName) {
+        if (userName == null || userName.isEmpty() || SysConstants.ADMIN.equalsIgnoreCase(userName)) {
+            return menuMapper.selectAll();
+        }
+        return menuMapper.findByUserName(userName);
     }
 
     @Override
@@ -55,24 +64,14 @@ public class MenuServiceImpl implements MenuService {
         return Collections.emptyList();
     }
 
-    @Override
-    public List<Menu> findByUser(String userName) {
-        return Collections.emptyList();
-    }
-
-    private void findChildren(List<Menu> sysMenus, List<Menu> menus, int menuType) {
-        for (Menu sysMenu : sysMenus) {
-
-        }
-    }
-
     private boolean exists(List<Menu> menus, Menu menu) {
-        boolean exists = false;
-        for (Menu menu1 : menus) {
-            if (menu1.getId().equals(menu.getId())) {
-                exists = true;
+        boolean exist = false;
+        for (Menu m : menus) {
+            if (m.getId().equals(menu.getId())) {
+                exist = true;
+                break;
             }
         }
-        return exists;
+        return exist;
     }
 }

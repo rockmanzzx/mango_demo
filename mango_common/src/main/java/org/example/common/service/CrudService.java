@@ -12,7 +12,6 @@ public interface CrudService<T> {
     int delete(T t);
     int delete(List<T> list);
     T findById(Long id);
-    List<T> findAll();
 
     /**
      * 分页查询

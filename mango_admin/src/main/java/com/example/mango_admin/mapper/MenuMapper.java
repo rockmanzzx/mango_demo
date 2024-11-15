@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.Menu;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface MenuMapper {
@@ -47,5 +49,15 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu row);
 
     int insertSelective(Menu record);
+
+    List<Menu> findPage();
+
+    List<Menu> findPageByName(@Param("name") String name);
+
+    List<Menu> findAll();
+
+    List<Menu> findByUserName(@Param("userName") String userName);
+
+    List<Menu> findRoleMenus(@Param("roleId") Long roleId);
 
 }

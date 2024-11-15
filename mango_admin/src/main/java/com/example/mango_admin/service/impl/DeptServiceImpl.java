@@ -75,11 +75,6 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public List<Dept> findAll() {
-        return deptMapper.selectAll();
-    }
-
-    @Override
     public PageResult findPage(PageRequest pageRequest) {
         return MyBatisPageHelper.findPage(pageRequest, deptMapper);
     }

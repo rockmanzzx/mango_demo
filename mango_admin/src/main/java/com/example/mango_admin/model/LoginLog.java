@@ -10,6 +10,11 @@ import java.util.Date;
  * This class corresponds to the database table sys_login_log
  */
 public class LoginLog {
+
+    public static final String STATUS_LOGIN = "login";
+    public static final String STATUS_LOGOUT = "logout";
+    public static final String STATUS_ONLINE = "online";
+
     /**
      * Database Column Remarks:
      *   编号

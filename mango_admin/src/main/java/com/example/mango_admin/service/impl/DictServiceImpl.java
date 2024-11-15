@@ -45,11 +45,6 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<Dict> findAll() {
-        return dictMapper.selectAll();
-    }
-
-    @Override
     public PageResult findPage(PageRequest pageRequest) {
         Object label = pageRequest.getParamValue("label");
         if (label != null) {

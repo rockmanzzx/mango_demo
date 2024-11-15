@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.Log;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface LogMapper {
@@ -43,4 +45,8 @@ public interface LogMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Log row);
+
+    List<Log> findPage();
+
+    List<Log> findPageByUserName(@Param("userName") String userName);
 }
