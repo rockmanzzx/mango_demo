@@ -72,4 +72,17 @@
     del_flag
     from sys_role_menu
   </select>
+  <select id="findRoleMenus" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select *
+    from sys_role_menu
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select *
+    from sys_role_menu
+  </select>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long">
+    delete from sys_role_menu
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
 </mapper>

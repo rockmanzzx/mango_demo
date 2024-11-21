@@ -29,14 +29,12 @@ public class ConfigController {
         return HttpResult.success(configService.delete(configs));
     }
 
-    // findPage
     @PreAuthorize("hasAuthority('sys:config:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest) {
         return HttpResult.success(configService.findPage(pageRequest));
     }
 
-    // findByLabel
     @PreAuthorize("hasAuthority('sys:config:view')")
     @GetMapping("/findByLabel")
     public HttpResult findByLabel(@RequestParam String label) {

@@ -1,7 +1,13 @@
 package com.example.mango_admin.service.impl;
 
+import com.example.mango_admin.mapper.RoleMapper;
 import com.example.mango_admin.mapper.UserMapper;
+import com.example.mango_admin.mapper.UserRoleMapper;
+import com.example.mango_admin.model.Menu;
+import com.example.mango_admin.model.Role;
 import com.example.mango_admin.model.User;
+import com.example.mango_admin.model.UserRole;
+import com.example.mango_admin.service.MenuService;
 import com.example.mango_admin.service.UserService;
 import com.example.mango_admin.util.RequestValidator;
 import org.apache.poi.ss.usermodel.Cell;
@@ -15,24 +21,49 @@ import org.example.common.page.PageResult;
 import org.example.common.util.PoiUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private MenuService menuService;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
+    @Transactional
     @Override
     public int save(User user) {
+        Long id = null;
         if (user.getId() == null || user.getId() == 0) {
-            return userMapper.insert(user);
+            userMapper.insertSelective(user);
+            id = user.getId();
+        } else {
+            userMapper.updateByPrimaryKey(user);
         }
-        return userMapper.updateByPrimaryKey(user);
+        if (id != null && id == 0) {
+            return 1;
+        }
+        if (id != null) {
+            for (UserRole userRole : user.getUserRoles()) {
+                userRole.setUserId(id);
+            }
+        } else {
+            if (!user.getUserRoles().isEmpty()) {
+                userRoleMapper.deleteByUserId(user.getId());
+            }
+        }
+        for (UserRole userRole : user.getUserRoles()) {
+            userRoleMapper.insert(userRole);
+        }
+        return 1;
     }
 
     @Override
@@ -54,36 +85,72 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userMapper.selectAll();
+    public PageResult findPage(PageRequest pageRequest) {
+        PageResult pageResult = null;
+        Object name = pageRequest.getParamValue("name");
+        Object email = pageRequest.getParamValue("email");
+        if (name != null) {
+            if (email != null) {
+                pageResult = MyBatisPageHelper.findPage(pageRequest, userMapper, "findPageByNameAndEmail", name, email);
+            } else {
+                pageResult = MyBatisPageHelper.findPage(pageRequest, userMapper, "findPageByName", name);
+            }
+        } else {
+            pageResult = MyBatisPageHelper.findPage(pageRequest, userMapper);
+        }
+        return pageResult;
     }
 
     @Override
-    public User findByName(String name) {
-        List<User> userList = userMapper.selectByName(name);
-        if (!userList.isEmpty()) {
-            return userMapper.selectByName(name).get(0);
-        } else {
-            return null;
+    public User findByName(String username) {
+        User user = userMapper.findByName(username);
+        List<UserRole> userRoles = userRoleMapper.findUserRoles(user.getId());
+        user.setUserRoles(userRoles);
+        user.setRoleNames(getRoleNames(userRoles));
+        return user;
+    }
+
+    private void findUserRoles(PageResult pageResult) {
+        List<?> content = pageResult.getContent();
+        for (Object object : content) {
+            User user = (User) object;
+            List<UserRole> userRoles = userRoleMapper.findUserRoles(user.getId());
+            user.setUserRoles(userRoles);
+            user.setRoleNames(getRoleNames(userRoles));
         }
+    }
+
+    private String getRoleNames(List<UserRole> userRoles) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Iterator<UserRole> iterator = userRoles.iterator(); iterator.hasNext();) {
+            UserRole userRole = iterator.next();
+            Role role = roleMapper.selectByPrimaryKey(userRole.getRoleId());
+            if (role == null) {
+                continue;
+            }
+            stringBuilder.append(role.getRemark());
+            if (iterator.hasNext()) {
+                stringBuilder.append(",");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     @Override
     public Set<String> findPermissions(String name) {
-        // TODO: findPermissionsByName
-        return Collections.emptySet();
+        Set<String> perms = new HashSet<>();
+        List<Menu> menus = menuService.findByUser(name);
+        for (Menu menu : menus) {
+            if (menu.getPerms() != null && !menu.getPerms().isEmpty()) {
+                perms.add(menu.getPerms());
+            }
+        }
+        return perms;
     }
 
     @Override
-    public PageResult findPage(PageRequest pageRequest) {
-        return MyBatisPageHelper.findPage(pageRequest, userMapper);
-    }
-
-    @Override
-    public PageResult findPageByName(PageRequest pageRequest) {
-        RequestValidator.validatePageRequest(pageRequest, "name");
-        String name = (String) pageRequest.getParams().get("name");
-        return MyBatisPageHelper.findPage(pageRequest, userMapper, "selectByName", name);
+    public List<UserRole> findUserRoles(Long userId) {
+        return userRoleMapper.findUserRoles(userId);
     }
 
     @Override

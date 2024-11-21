@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.Role;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface RoleMapper {
@@ -43,4 +45,12 @@ public interface RoleMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Role row);
+
+    List<Role> findPage();
+
+    List<Role> findAll();
+
+    List<Role> findPageByName(@Param("name") String name);
+
+    List<Role> findByName(@Param("name") String name);
 }

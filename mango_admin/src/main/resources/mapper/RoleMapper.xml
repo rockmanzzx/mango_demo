@@ -72,4 +72,22 @@
     del_flag
     from sys_role
   </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select *
+    from sys_role
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select *
+    from sys_role
+  </select>
+  <select id="findPageByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from sys_role
+    where name like concat('%',#{name},'%')
+  </select>
+  <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from sys_role
+    where name = #{name}
+  </select>
 </mapper>

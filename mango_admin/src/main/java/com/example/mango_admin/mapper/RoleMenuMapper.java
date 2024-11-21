@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.RoleMenu;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface RoleMenuMapper {
@@ -43,4 +45,10 @@ public interface RoleMenuMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(RoleMenu row);
+
+    List<RoleMenu> findRoleMenus(@Param("roleId") Long roleId);
+
+    List<RoleMenu> findAll();
+
+    int deleteByRoleId(@Param("roleId") Long roleId);
 }

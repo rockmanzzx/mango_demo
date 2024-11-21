@@ -46,6 +46,14 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User row);
 
-    List<User> selectByName(@Param("name") String name);
+    int insertSelective(User record);
+
+    List<User> findPage();
+
+    User findByName(@Param("name") String name);
+
+    List<User> findPageByName(@Param("name") String name);
+
+    List<User> findPageByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
 }

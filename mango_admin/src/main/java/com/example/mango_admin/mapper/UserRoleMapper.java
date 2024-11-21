@@ -1,6 +1,8 @@
 package com.example.mango_admin.mapper;
 
 import com.example.mango_admin.model.UserRole;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserRoleMapper {
@@ -43,4 +45,8 @@ public interface UserRoleMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(UserRole row);
+
+    List<UserRole> findUserRoles(@Param("userId") Long userId);
+
+    int deleteByUserId(@Param("userId") Long userId);
 }

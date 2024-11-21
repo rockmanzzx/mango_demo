@@ -25,21 +25,18 @@ public class DictController {
         return HttpResult.success(dictService.save(dict));
     }
 
-    // delete
     @PreAuthorize("hasAuthority('sys:dict:delete')")
     @PostMapping("delete")
     public HttpResult delete(List<Dict> dicts) {
         return HttpResult.success(dictService.delete(dicts));
     }
 
-    //findPage
     @PreAuthorize("hasAuthority('sys:dict:view')")
     @PostMapping("findPage")
     public HttpResult findPage(PageRequest pageRequest) {
         return HttpResult.success(dictService.findPage(pageRequest));
     }
 
-    // findPageByLabel
     @PreAuthorize("hasAuthority('sys:dict:view')")
     @PostMapping("findByLabel")
     public HttpResult findByLabel(String label) {

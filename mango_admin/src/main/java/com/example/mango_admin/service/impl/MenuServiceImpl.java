@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -61,7 +62,40 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> findTree(String userName, int menuType) {
-        return Collections.emptyList();
+        List<Menu> resultMenus = new ArrayList<>();
+        List<Menu> userMenus = findByUser(userName);
+        for (Menu menu : userMenus) {
+            if (menu.getParentId() == null || menu.getParentId() == 0) {
+                menu.setLevel(0);
+                if (!exists(resultMenus, menu)) {
+                    resultMenus.add(menu);
+                }
+            }
+        }
+        resultMenus.sort(Comparator.comparing(Menu::getOrderNum));
+        findChildren(resultMenus, userMenus, menuType);
+        return resultMenus;
+    }
+
+    private void findChildren(List<Menu> resultMenus, List<Menu> userMenus, int menuType) {
+        for (Menu parentMenu : resultMenus) {
+            List<Menu> childMenus = new ArrayList<>();
+            for (Menu menu : userMenus) {
+                if (menuType == 1 && menu.getType() == 2) {
+                    continue;
+                }
+                if (parentMenu.getId() != null && menu.getParentId().equals(parentMenu.getId())) {
+                    menu.setParentName(parentMenu.getName());
+                    menu.setLevel(parentMenu.getLevel() + 1);
+                    if (!exists(childMenus, menu)) {
+                        childMenus.add(menu);
+                    }
+                }
+            }
+            parentMenu.setChildren(childMenus);
+            childMenus.sort(Comparator.comparing(Menu::getOrderNum));
+            findChildren(childMenus, userMenus, menuType);
+        }
     }
 
     private boolean exists(List<Menu> menus, Menu menu) {

@@ -1,6 +1,8 @@
 package com.example.mango_admin.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Database Table Remarks:
@@ -10,6 +12,38 @@ import java.util.Date;
  * This class corresponds to the database table sys_user
  */
 public class User {
+
+    // 非数据库字段
+    private String deptName;
+    // 非数据库字段
+    private String roleNames;
+    // 非数据库字段
+    private List<UserRole> userRoles = new ArrayList<>();
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getRoleNames() {
+        return roleNames;
+    }
+
+    public void setRoleNames(String roleNames) {
+        this.roleNames = roleNames;
+    }
+
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
     /**
      * Database Column Remarks:
      *   编号

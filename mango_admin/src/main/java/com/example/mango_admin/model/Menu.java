@@ -1,6 +1,7 @@
 package com.example.mango_admin.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Database Table Remarks:
@@ -10,6 +11,38 @@ import java.util.Date;
  * This class corresponds to the database table sys_menu
  */
 public class Menu {
+
+    // 非数据库字段
+    private String parentName;
+    // 非数据库字段
+    private Integer level;
+    // 非数据库字段
+    private List<Menu> children;
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
+
     /**
      * Database Column Remarks:
      *   编号
