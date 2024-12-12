@@ -19,6 +19,8 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = getJwtFromRequest(request);
+
+        logger.info("收到请求: " + request.getMethod() + " " + request.getRequestURI());
         logger.info("Received token: " + token);
 
         SecurityUtils.checkAuthentication(request);
